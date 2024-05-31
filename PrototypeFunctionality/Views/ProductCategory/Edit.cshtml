@@ -1,0 +1,53 @@
+﻿@model ProductCategoryEditModel;
+
+@{
+    ViewData["Title"] = "Edit Product Category";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <h3 class="text-center">Edit Product Category</h3>
+        <hr />
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form class="row g-3 mt-4" autocomplete="off" method="post" asp-controller="ProductCategory" asp-action="Edit">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ApplicationUserId" />
+                    <div class="col-md-12">
+                        <label for="name" class="form-label" asp-for="Name">Name</label>
+                        <input type="text" class="form-control" id="name" asp-for="Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-sm btn-outline-success">
+                            <i class="fa-regular fa-floppy-disk"></i> &nbsp;
+                            Edit
+                        </button>
+                        <a asp-controller="ProductCategory" asp-action="Index" class="btn btn-sm btn-outline-info">
+                            <i class="fa-solid fa-xmark"></i> &nbsp;
+                            Cancel
+                        </a>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger mt-3"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Notifaction Message -->
+@if (TempData["LoginNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["LoginNotifaction"]', "Success");
+        });
+    </script>
+    }
+}
+

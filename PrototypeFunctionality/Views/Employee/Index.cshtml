@@ -1,0 +1,94 @@
+﻿@model List<ApplicationUser>;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="text-center">Farmers</h3>
+        <hr />
+        <a asp-controller="Employee" asp-action="AddFarmer" class="btn btn-sm btn-outline-primary">
+            <i class="fa-solid fa-user-plus"></i> &nbsp;
+            Add Farmer
+        </a>
+    </div>
+</div>
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var farmer in Model)
+                        {
+                            <tr>
+                                <td>@farmer.FirstName @farmer.LastName</td>
+                                <td>@farmer.Email</td>
+                                <td>@farmer.City</td>
+                                <td>
+                                    <a asp-controller="Employee" asp-action="Delete" asp-route-id="@farmer.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="fa-solid fa-trash"></i> &nbsp;
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Notifaction Message -->
+@if (TempData["LoginNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["LoginNotifaction"]', "Success");
+        });
+    </script>
+    }
+}
+<!-- Notifaction Message -->
+@if (TempData["FarmerCreateNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["FarmerCreateNotifaction"]', "Success");
+        });
+    </script>
+    }
+}
+<!-- Notifaction Message -->
+@if (TempData["FarmerDeleteNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["FarmerDeleteNotifaction"]', "Success");
+        });
+    </script>
+    }
+}

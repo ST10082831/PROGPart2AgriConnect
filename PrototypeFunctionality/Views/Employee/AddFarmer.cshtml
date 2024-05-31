@@ -1,0 +1,77 @@
+﻿@model FarmerAddModel;
+
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <h3 class="text-center">Add Farmer</h3>
+        <hr />
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-sm-8">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form class="row g-3 mt-4" autocomplete="off" method="post" asp-controller="Employee" asp-action="AddFarmer">
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label" asp-for="FirstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" asp-for="FirstName">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label" asp-for="LastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" asp-for="LastName">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label" asp-for="Email">Email</label>
+                        <input type="email" class="form-control" id="email" asp-for="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="city" class="form-label" asp-for="City">City</label>
+                        <input type="City" class="form-control" id="City" asp-for="City">
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password" class="form-label" asp-for="Password">Password</label>
+                        <input type="password" class="form-control" id="password" asp-for="Password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirmpassword" class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmpassword" asp-for="ConfirmPassword">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" class="form-control" id="confirmpassword" asp-for="UserTypeId" value="2">
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-sm btn-outline-success">
+                            <i class="fa-regular fa-floppy-disk"></i> &nbsp;
+                            Save
+                        </button>
+                        <a asp-controller="Employee" asp-action="Index" class="btn btn-sm btn-outline-info">
+                            <i class="fa-solid fa-xmark"></i> &nbsp;
+                            Cancel
+                        </a>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger mt-3"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Notifaction Message -->
+@if (TempData["LoginNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["LoginNotifaction"]', "Success");
+        });
+    </script>
+    }
+}
+

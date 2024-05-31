@@ -1,0 +1,113 @@
+﻿@model List<Product>;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="text-center">Products</h3>
+        <hr />
+        <a asp-controller="Product" asp-action="Add" class="btn btn-sm btn-outline-primary">
+            <i class="fa-solid fa-user-plus"></i> &nbsp;
+            Add Product
+        </a>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Production Date</th>
+                            <th>Details</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@product.Name </td>
+                                <td>@product.ProductCategory.Name</td>
+                                <td>@product.ProductionDate.ToString("MM/dd/yyyy")</td>
+                                <td>@product.Details</td>
+                                <td>
+                                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-outline-info">
+                                        <i class="fa-regular fa-pen-to-square"></i> &nbsp;
+                                        Edit
+                                    </a>
+                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="fa-solid fa-trash"></i> &nbsp;
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Production Date</th>
+                            <th>Details</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Notifaction Message -->
+@if (TempData["LoginNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["LoginNotifaction"]', "Success");
+        });
+    </script>
+    }
+}
+<!-- Notifaction Message -->
+@if (TempData["ProductCreateNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["ProductCreateNotifaction"]', "Success");
+        });
+    </script>
+    }
+}
+<!-- Notifaction Message -->
+@if (TempData["ProductEditNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["ProductEditNotifaction"]', "Success");
+        });
+    </script>
+    }
+}
+<!-- Notifaction Message -->
+@if (TempData["ProductDeleteNotifaction"] != null)
+{
+    @section Scripts
+    {
+    <script>
+        $(function () {
+            toastr.success('@TempData["ProductDeleteNotifaction"]', "Success");
+        });
+    </script>
+    }
+}

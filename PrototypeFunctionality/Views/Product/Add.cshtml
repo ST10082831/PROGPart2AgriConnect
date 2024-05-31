@@ -1,0 +1,58 @@
+﻿@model ProductCreateModel;
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <h3 class="text-center">Add Product</h3>
+        <hr />
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form class="row g-3 mt-4" autocomplete="off" method="post" asp-controller="Product" asp-action="Add">
+                    <div class="col-md-12">
+                        <label for="name" class="form-label" asp-for="Name">Name</label>
+                        <input type="text" class="form-control" id="name" asp-for="Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="productCategoryId" class="form-label" asp-for="ProductCategoryId">Category</label>
+                        <select class="form-control" id="productCategoryId" asp-for="ProductCategoryId">
+                            @foreach (var productCategory in ViewBag.ProductCategories)
+                            {
+                                <option value="@productCategory.Id">@productCategory.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="productionDate" class="form-label" asp-for="ProductionDate">Production Date</label>
+                        <input type="date" class="form-control" id="name" asp-for="ProductionDate">
+                        <span asp-validation-for="ProductionDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="details" class="form-label" asp-for="Details">Details</label>
+                        <textarea class="form-control" id="details" name="details" asp-for="Details"></textarea>
+                        <span asp-validation-for="Details" class="text-danger"></span>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-sm btn-outline-success">
+                            <i class="fa-regular fa-floppy-disk"></i> &nbsp;
+                            Save
+                        </button>
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-outline-info">
+                            <i class="fa-solid fa-xmark"></i> &nbsp;
+                            Cancel
+                        </a>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger mt-3"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
